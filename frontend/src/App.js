@@ -5,7 +5,6 @@ import Banner from './Components/Banner/Banner';
 import Header from './Components/Header/Header';
 import TopNav from './Components/Header/TopNav';
 import { UserContext } from './Static/userContext';
-
 function App() {
   const [user,setUser]=useState(null)
   const value = useMemo(()=>({user,setUser}),[user,setUser])

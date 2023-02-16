@@ -4,12 +4,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { UserContext } from '../../Static/userContext';
 import './Header.css'
+import Header from './Header';
 function TopNav() {
     const {user,setUser} = useContext(UserContext)
     const [open, setOpen] = useState(false);
     const [openLogin,setLoginOpen] = useState(false)
     const [Wrongpassword,setPassword] = useState(false)
-    const handleClickOpen = () => {
+     const handleClickOpen = () => {
         setOpen(true);
       };
       const nameRef = useRef();
@@ -28,6 +29,10 @@ function TopNav() {
       }
       function handleLogin(data){
         console.log("loginData",data)
+      }
+      function logout(){
+        localStorage.removeItem('Authinfo');
+        setUser(null)
       }
       function handlesubmit(e){
        
@@ -84,18 +89,21 @@ function TopNav() {
             <li>Home</li>
             <li>Rides</li>
             <li>My rides</li>
-            <li onClick={handleClickOpen}>Login</li>
+            {
+              user ? "" : <li onClick={handleClickOpen}>Login</li>
+            }
+            
             {user ? 
             <li><div class="dropdown">
                   <span>{user ? user.username :""}</span>
                   <div class="dropdown-content">
-                  <p onClick={()=>setUser(null)}>Logout</p>
+                  <p onClick={()=>logout()}>Logout</p>
                   </div>
                 </div>
             </li>
            :"" }
         </ul>
-
+       
         <Dialog onClose={handleClose} open={open} className="formTop">
             
             <form className='loginForm' onSubmit={handlesubmit}>
@@ -140,7 +148,7 @@ function TopNav() {
 
 
     </Dialog>
-
+                   
     </div>
   )
 }
