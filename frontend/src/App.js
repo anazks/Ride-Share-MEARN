@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+
+import { useMemo, useState,useEffect } from 'react';
 import './App.css';
+import Banner from './Components/Banner/Banner';
+import Header from './Components/Header/Header';
+import TopNav from './Components/Header/TopNav';
+import { UserContext } from './Static/userContext';
 
 function App() {
+  const [user,setUser]=useState(null)
+  const value = useMemo(()=>({user,setUser}),[user,setUser])
+  useEffect(() => {
+      const dataStr = localStorage.getItem('Authinfo');
+      if(dataStr){
+        console.log("from local storage",JSON.parse(dataStr))
+        setUser(JSON.parse(dataStr))
+      }
+}, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       
+        
+     <UserContext.Provider value={value}>
+        <TopNav/>
+        <Header/>
+        <Banner/>   
+     </UserContext.Provider>
+
+     
+      
+     
     </div>
   );
 }
