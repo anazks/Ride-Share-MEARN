@@ -24,9 +24,21 @@ const UserSchema = new mongoose.Schema({
     payments: {
         type: String,
         required: true
+    },
+    passengers: {
+        type: Number,
+        required: true
+    },
+    startingPlace: {
+        type: String,
+        required: true
+    },
+    endingPlace: {
+        type: String,
+        required: true
     }
 })
 
 
 
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("Rides", UserSchema);

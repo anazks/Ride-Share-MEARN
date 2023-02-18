@@ -16,6 +16,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import AddRide from '../forms/AddRide';
+import {Routes,Route,Link,useNavigate} from 'react-router-dom'
+
 
 function Header() {
 
@@ -23,7 +25,7 @@ function Header() {
   const [openRide, setOpenRide] = React.useState(false);
   const handleOpenAddRide = () => setOpenRide(true);
   const handleCloseRide = () => setOpenRide(false);
-
+  const navigate = useNavigate()
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,6 +33,9 @@ function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+  const goToNavigate=()=>{
+    navigate('/viewRide')
+  }
   const {user,setUser} = useContext(UserContext)
   const [alert,setAlert]= useState(false)
   function hanldeLogin(){
@@ -63,7 +68,7 @@ function Header() {
               <button className='addRide' onClick={hanldeLogin}>Add Ride</button>
             }
             {
-              user ?   <button className='viewRide'>View Rides</button>
+              user ?   <button className='viewRide' onClick={()=>goToNavigate()} >View Rides</button>
                : 
                <button className='viewRide' onClick={hanldeLogin}>View Ride</button>
             }
@@ -102,7 +107,7 @@ function Header() {
             ADD RIDE
           </Typography>
           <Typography id="keep-mounted-modal-description">
-                <AddRide/>
+                <AddRide  setOpenRide={setOpenRide}/>
           </Typography>
         </Box>
       </Modal>

@@ -4,6 +4,7 @@ import './App.css';
 import Banner from './Components/Banner/Banner';
 import Header from './Components/Header/Header';
 import TopNav from './Components/Header/TopNav';
+import Routers from './MainRouter/Routers';
 import { UserContext } from './Static/userContext';
 function App() {
   const [user,setUser]=useState(null)
@@ -19,11 +20,9 @@ function App() {
     <div className="App">
        
         
-     <UserContext.Provider value={value}>
-        <TopNav/>
-        <Header/>
-        <Banner/>   
-     </UserContext.Provider>
+    <UserContext.Provider value={value}>
+        <Routers/>
+    </UserContext.Provider>
 
      
       

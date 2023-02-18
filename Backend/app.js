@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const session = require('express-session')
 const connectDB = require('./config/config')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     }
   }
 connect();
+app.use(session({secret:'keyboardcat', cookie:{ maxAge: 6000000 }}))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
