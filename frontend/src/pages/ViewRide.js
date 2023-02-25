@@ -18,14 +18,25 @@ function ViewRide() {
             user = JSON.parse(user)
             if(user){
               console.log(user._id,"viewride")
-              Axios.get(`/myRide/${user._id}`).then((response)=>{
-                console.log(response.data)
-                setRides(response.data)
-              })
+                  viewRide(user);
             }else{
               console.log("no-login")
             }
     }, [])
+    const viewRide =(user)=>{
+            Axios.get(`/getallmyRides/${user._id}`).then((response)=>{
+              console.log(response.data)
+              setRides(response.data)
+            })
+    }
+    const delteRide = (id) =>{
+        Axios.get(`/deleteRide/${id}`).then((response)=>{
+          console.log(response.data)
+          if(response.data){
+            viewRide()
+          }
+      })
+    }
     
   return (
     <div>
@@ -60,7 +71,7 @@ function ViewRide() {
               <TableCell align="right">{row.passengers}</TableCell>
               <TableCell align="right">{row.startingPlace}</TableCell>
               <TableCell align="right">{row.endingPlace}</TableCell>
-              <TableCell align="right"><button className='deleteBtn'>Delete</button></TableCell>
+              <TableCell align="right"><button className='deleteBtn' onClick={()=>delteRide(row._id)}>Delete</button></TableCell>
             </TableRow>
           ))}
         </TableBody>

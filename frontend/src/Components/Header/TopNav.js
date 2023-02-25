@@ -3,6 +3,8 @@ import Axios from '../../Static/Axios'
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { UserContext } from '../../Static/userContext';
+import {Routes,Route,Link,useNavigate} from 'react-router-dom'
+
 import './Header.css'
 import Header from './Header';
 function TopNav() {
@@ -86,9 +88,9 @@ function TopNav() {
     <div className='topNav'>
         <ul>
             <li> <img className='logo' src='https://www.ridesharing.com/en-ca/images/Logo_CV_EN.png'/></li>
-            <li>Home</li>
-            <li>Rides</li>
-            <li>My rides</li>
+            <li> <a href='/' className='home'>Home</a> </li>
+            <li><a href='/RideRequest' className='home'>Ride Request</a></li>
+            <li><a href=''className='home'>Approved Rides</a> </li>
             {
               user ? "" : <li onClick={handleClickOpen}>Login</li>
             }

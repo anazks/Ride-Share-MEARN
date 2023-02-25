@@ -19,7 +19,11 @@ const UserSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "default"
+        default: "available"
+    },
+    bookedUser: {
+        type: String,
+        default: "no"
     },
     payments: {
         type: String,

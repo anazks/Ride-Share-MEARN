@@ -2,12 +2,14 @@ import React, { useState,useEffect,useContext } from 'react'
 import Axios from '../../Static/Axios'
 import './Banner.css'
 import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircularProgress from '@mui/material/CircularProgress';
 import { UserContext } from '../../Static/userContext'
+import { useNavigate } from 'react-router-dom';
 
 function Banner() {
         const {user,setUser} = useContext(UserContext)
         const [Redes,setRide]= useState([])
+        const navigate =  useNavigate();
         useEffect(() => {
                 if(user){
                 let riderId = localStorage.getItem('Authinfo')
@@ -20,12 +22,18 @@ function Banner() {
                         setRide(response.data)
                 })
                 }
-        },[Redes])
+        },[])
         const finishTrip=(id)=>{
                 console.log(id,"ride Id")
                 Axios.get(`/finishTrip/${id}`).then((response)=>{
                         console.log(response.data)
                 })
+        }
+        const findBike =()=>{
+                navigate('/viewBikeRide')
+        }
+        const findCar =()=>{
+                navigate('/viewCarRide')
         }
         
   return (
@@ -68,7 +76,7 @@ function Banner() {
                     <img  src="https://thumbs.gfycat.com/PastelCalculatingArmadillo-max-1mb.gif" alt="" />
                 <div className='content'>
                         <h2>Find a Bike Ride</h2>
-                        <button>Find New</button>
+                        <button onClick={()=>findBike()}>Find New</button>
                 </div>
                 
             </div>
@@ -77,7 +85,7 @@ function Banner() {
                     <img  src="https://media.tenor.com/u6W2jKHboGAAAAAC/car.gif" alt="" />
                     <div className='content'>
                         <h2>Find a Car Ride</h2>
-                        <button>Find New</button>
+                        <button onClick={()=>findCar()}>Find New</button>
                 </div>
            </div>
         </div>   
